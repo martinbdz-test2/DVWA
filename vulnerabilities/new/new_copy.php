@@ -7,3 +7,5 @@ function testMe() {
 }
 
 echo testMe();
+
+echo "Just adding some code";

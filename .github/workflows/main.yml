@@ -4,10 +4,7 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: [master]
-  schedule:
-    # Every Sunday at 0AM UTC
-    - cron: "0 0 * * 0"
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
@@ -16,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Test with pytest
-        run: |
-          pip3 install pytest
-          python3 -m pytest -s
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@main
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
